@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/bistrobossrestaurant.png';
+import avatarImg from '../../../assets/icon/avatar.jpg';
+import { useContext } from 'react';
+import { AuthContext } from '../../../providers/AuthProviders';
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext);
     const navOptions = <>
         <li><Link to="/">HOME</Link></li>
         <li><a>CONTACT US</a></li>
@@ -9,8 +13,16 @@ const Navbar = () => {
 
         <li><a>DASHBOARD</a></li>
         <li><Link to="/menu">OUR MENU</Link></li>
-        <li><a>OUR SHOP</a></li>
+        <li><Link to='/order/salad'>ORDER FOOD</Link></li>
     </>
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {
+
+            })
+            .catch(error => console.log(error))
+    }
     return (
         <>
             <div className="navbar fixed z-10 bg-[#000000] bg-opacity-30 max-w-screen-xl text-white">
@@ -31,7 +43,20 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Get started</a>
+                    {
+                        user ? <>
+                            <button onClick={handleLogOut} className="btn bg-[#600303]">Log Out</button>
+                            <div className="w-10 rounded-full">
+                                <img src={user.photoURL} />
+                            </div>
+                        </>
+                            : <>
+                                <Link to='/login' className="btn bg-[#660505] mr-1">Login</Link>
+                                <div className="w-10 rounded-full">
+                                    <img src={avatarImg} />
+                                </div>
+                            </>
+                    }
                 </div>
             </div>
         </>
