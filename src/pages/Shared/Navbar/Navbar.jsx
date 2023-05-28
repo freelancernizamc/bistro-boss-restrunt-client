@@ -1,11 +1,14 @@
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/bistrobossrestaurant.png';
+import { FaShoppingCart } from "react-icons/fa";
 import avatarImg from '../../../assets/icon/avatar.jpg';
 import { useContext } from 'react';
 import { AuthContext } from '../../../providers/AuthProviders';
+import useCart from '../../../hooks/useCart';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
+    const [cart] = useCart();
     const navOptions = <>
         <li><Link to="/">HOME</Link></li>
         <li><a>CONTACT US</a></li>
@@ -14,6 +17,10 @@ const Navbar = () => {
         <li><a>DASHBOARD</a></li>
         <li><Link to="/menu">OUR MENU</Link></li>
         <li><Link to='/order/salad'>ORDER FOOD</Link></li>
+        <li><Link to='/'><div className=" gap-2 flex">
+            <FaShoppingCart />
+            <div className="badge badge-secondary">+{cart?.length || 0}</div>
+        </div></Link></li>
     </>
 
     const handleLogOut = () => {
