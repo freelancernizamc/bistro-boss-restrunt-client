@@ -1,8 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 import login from '../../assets/home/authentication1.png';
+import { FcGoogle } from 'react-icons/fc'
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../providers/AuthProviders';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2'
 
@@ -10,7 +12,7 @@ const Login = () => {
 
     const [disabled, setDisabled] = useState(true);
 
-    const { signIn } = useContext(AuthContext);
+    const { signIn, setLoading, signInWithGoogle, } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -52,6 +54,19 @@ const Login = () => {
         else {
             setDisabled(true);
         }
+    }
+
+    // Handle Google signIn
+    const handleGoogleSignIn = () => {
+        signInWithGoogle().then(result => {
+            console.log(result.user)
+            navigate(from, { replace: true })
+        })
+            .catch(err => {
+                setLoading(false);
+                console.log(err.message)
+                toast.error(err.message)
+            })
     }
 
     return (
@@ -101,9 +116,18 @@ const Login = () => {
                                 </div>
                             </form>
                             <p className='text-center mb-2'><small>New Here? <Link to='/signup' className='text-orange-700 font-semibold'>Create a New Account</Link></small></p>
+                            <div className="divider">OR</div>
+                            <div onClick={handleGoogleSignIn} className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
+                                <FcGoogle size={32} />
+
+                                <p>Continue with Google</p>
+                            </div>
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
         </>
     );

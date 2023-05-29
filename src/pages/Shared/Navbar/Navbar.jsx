@@ -14,7 +14,7 @@ const Navbar = () => {
         <li><a>CONTACT US</a></li>
 
 
-        <li><a>DASHBOARD</a></li>
+        <li><Link to='/dashboard'>DASHBOARD</Link></li>
         <li><Link to="/menu">OUR MENU</Link></li>
         <li><Link to='/order/salad'>ORDER FOOD</Link></li>
         <li><Link to='/dashboard/mycart'><div className=" gap-2 flex">
