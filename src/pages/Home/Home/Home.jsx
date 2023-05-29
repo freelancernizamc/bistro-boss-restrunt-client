@@ -10,10 +10,11 @@ import Testimonials from "../Testimonials/Testimonials";
 
 const Home = () => {
     return (
-        <div>   <Helmet>
-            <title>Bistro Boss | Home</title>
+        <div>
+            <Helmet>
+                <title>Bistro Boss | Home</title>
 
-        </Helmet>
+            </Helmet>
             <Banner />
             <Category />
             <Content />

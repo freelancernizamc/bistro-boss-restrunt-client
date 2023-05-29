@@ -2,6 +2,8 @@ import { Helmet } from "react-helmet-async";
 import useCart from "../../../hooks/useCart";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
+import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+
 
 
 const MyCart = () => {
@@ -46,12 +48,16 @@ const MyCart = () => {
                 <title>Bistro Boss | My Cart</title>
 
             </Helmet>
-            <div className="uppercase font-semibold h-[60px] flex justify-evenly items-center">
+            <SectionTitle
+                subHeading="---Hurry UP----"
+                heading="Manage My Cart" />
+            <div className="uppercase font-semibold h-[60px] flex justify-evenly items-center bg-[#9C0B0B] text-white">
                 <h3 className="text-3xl">Total Items: {cart.length}</h3>
                 <h3 className="text-3xl">Total Price: ${total}</h3>
-                <button className="btn btn-success btn-sm">Pay</button>
+                <button className="btn bg-[#9C0B0B] btn-sm">Pay</button>
             </div>
             <div className="overflow-x-auto w-full">
+
                 <table className="table w-full">
                     {/* head */}
                     <thead>

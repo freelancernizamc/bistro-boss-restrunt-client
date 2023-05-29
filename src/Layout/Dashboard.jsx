@@ -1,6 +1,7 @@
 import { FaCalendar, FaHome, FaShoppingCart, FaWallet } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
+import logo from '../assets/bistrobossrestaurant.png';
 
 
 const Dashboard = () => {
@@ -13,9 +14,10 @@ const Dashboard = () => {
                 <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
 
             </div>
-            <div className="drawer-side bg-[#D1A054]">
+            <div className="drawer-side bg-[#650305fb] text-white">
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                <ul className="menu p-4 w-80 text-base-content">
+                <div className="mt-2 pl-5"><img src={logo} alt="logo" /></div>
+                <ul className="menu p-4 w-80 text-white">
 
                     <li><NavLink to="/dashboard/home"><FaHome /> User Home</NavLink></li>
                     <li><NavLink to="/reservation"><FaCalendar /> Reservation</NavLink></li>

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .drawer-side a.active {
-    color: white;
+    color: aqua;
 }
 
 .drawer-side a {
