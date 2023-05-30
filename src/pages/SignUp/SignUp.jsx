@@ -59,6 +59,15 @@ const SignUp = () => {
     // Handle Google signIn
     const handleGoogleSignIn = () => {
         signInWithGoogle().then(result => {
+            const saveUser = { name: result.user.displayName, email: result.user.email, photoURL: result.user.photoURL }
+            fetch('https://bistro-boss-server-azure.vercel.app/users', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(saveUser)
+            })
+
             console.log(result.user)
             navigate(from, { replace: true });
         })
