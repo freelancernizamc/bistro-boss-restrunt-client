@@ -3,6 +3,7 @@ import useCart from "../../../hooks/useCart";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import { Link } from "react-router-dom";
 
 
 
@@ -43,7 +44,7 @@ const MyCart = () => {
     }
 
     return (
-        <div className="w-full">
+        <div className="md:w-full">
             <Helmet>
                 <title>Bistro Boss | My Cart</title>
 
@@ -52,13 +53,13 @@ const MyCart = () => {
                 subHeading="---Hurry UP----"
                 heading="Manage My Cart" />
             <div className="uppercase font-semibold h-[60px] flex justify-evenly items-center bg-[#9C0B0B] text-white">
-                <h3 className="text-3xl">Total Items: {cart.length}</h3>
-                <h3 className="text-3xl">Total Price: ${total}</h3>
-                <button className="btn bg-[#9C0B0B] btn-sm">Pay</button>
+                <h3 className="md:text-3xl">Total Items: {cart.length}</h3>
+                <h3 className="md:text-3xl">Total Price: ${total}</h3>
+                <Link to='/dashboard/payment'><button className="btn bg-[#9C0B0B] btn-sm">Pay</button></Link>
             </div>
-            <div className="overflow-x-auto w-full">
+            <div className="overflow-x-auto md:w-full">
 
-                <table className="table w-full">
+                <table className="table md:w-full">
                     {/* head */}
                     <thead>
                         <tr>

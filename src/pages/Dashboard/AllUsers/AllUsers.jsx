@@ -65,7 +65,7 @@ const AllUsers = () => {
     }
 
     return (
-        <div className="w-full">
+        <div className="md:w-full">
             <Helmet>
                 <title>Bistro Boss | All Users</title>
 

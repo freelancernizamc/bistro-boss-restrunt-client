@@ -1,20 +1,26 @@
 import { FaBook, FaCalendar, FaHome, FaShoppingCart, FaUsers, FaUtensils, FaWallet } from "react-icons/fa";
 import { Link, NavLink, Outlet } from "react-router-dom";
+import { AiOutlineBars } from 'react-icons/ai'
 import useCart from "../hooks/useCart";
 import logo from '../assets/bistrobossrestaurant.png';
 import useAdmin from "../hooks/useAdmin";
 import useAuth from "../hooks/useAuth";
+import { useState } from "react";
 
 
 const Dashboard = () => {
 
     const [cart] = useCart();
     const { user, logOut } = useAuth();
-
+    const [isActive, setActive] = useState('false')
     // TODO: load data from the server to have dynamic isAdmin based on this page
     // const isAdmin = true;
     const [isAdmin] = useAdmin();
     console.log(isAdmin);
+
+    const handleToggle = () => {
+        setActive(!isActive)
+    }
 
     const handleLogOut = () => {
         logOut()
@@ -25,30 +31,37 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="drawer drawer-mobile">
+        <div className={`drawer ${isActive ? "drawer-mobile" : ""}`}>
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content flex flex-col items-center justify-center">
-                <Outlet />
-                <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
+            <div className="drawer-content flex md:flex-col items-center justify-center">
+                {isActive && (
+                    <Outlet />
+                )}
+                <button
+                    onClick={handleToggle}
+                    className='mobile-menu-button p-4 focus:outline-none focus:bg-gray-200 text-red-600 lg:hidden'
+                >
+                    <AiOutlineBars className='h-5 w-5' />
+                </button>
 
             </div>
             <div className="drawer-side bg-[#650305fb] text-white">
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                <div className="mt-2 pl-5"><img className='h-[30px]' src={logo} alt="logo" /></div>
+                <div className="mt-1 pl-5"><img className='h-[30px]' src={logo} alt="logo" /></div>
                 <ul className="menu p-4 w-80 text-white">
                     <div>
 
-                        <div className='flex flex-col items-center mt-6 -mx-2 '>
+                        <div className='flex flex-col items-center mt-0 -mx-2 '>
                             <Link to='/dashboard'>
                                 <img
-                                    className='object-cover w-24 h-24 mx-2 rounded-full'
+                                    className='object-cover w-20 h-20 mx-2 rounded-full'
                                     src={user?.photoURL}
                                     alt='avatar'
                                     referrerPolicy='no-referrer'
                                 />
                             </Link>
                             <Link to='/dashboard'>
-                                <h4 className='mx-2 mt-2 font-medium  hover:underline text-white'>
+                                <h4 className='mx-2 mt-1 font-medium  hover:underline text-white'>
                                     {user?.displayName}
                                 </h4>
                             </Link>
@@ -62,8 +75,8 @@ const Dashboard = () => {
 
                     {
                         isAdmin ? <>
-                            <li><NavLink to="/dashboard/home"><FaHome /> Admin Home</NavLink></li>
-                            <li><NavLink to="/reservation"><FaUtensils /> Add Items</NavLink></li>
+                            <li><NavLink to="/dashboard"><FaHome /> Admin Home</NavLink></li>
+                            <li><NavLink to="/dashboard/additem"><FaUtensils /> Add An Item</NavLink></li>
                             <li><NavLink to="/history"><FaWallet /> Manage Items</NavLink></li>
                             <li><NavLink to="/history"><FaBook /> Manage Bookings</NavLink></li>
                             <li><NavLink to="/dashboard/allusers"><FaUsers /> All Users</NavLink></li>
