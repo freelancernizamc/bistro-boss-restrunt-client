@@ -33,7 +33,7 @@ const Dashboard = () => {
     return (
         <div className={`drawer ${isActive ? "drawer-mobile" : ""}`}>
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content flex md:flex-col items-center justify-center">
+            <div className="drawer-content">
                 {isActive && (
                     <Outlet />
                 )}
@@ -77,7 +77,7 @@ const Dashboard = () => {
                         isAdmin ? <>
                             <li><NavLink to="/dashboard"><FaHome /> Admin Home</NavLink></li>
                             <li><NavLink to="/dashboard/additem"><FaUtensils /> Add An Item</NavLink></li>
-                            <li><NavLink to="/history"><FaWallet /> Manage Items</NavLink></li>
+                            <li><NavLink to="/dashboard/manageitems"><FaWallet /> Manage Items</NavLink></li>
                             <li><NavLink to="/history"><FaBook /> Manage Bookings</NavLink></li>
                             <li><NavLink to="/dashboard/allusers"><FaUsers /> All Users</NavLink></li>
 
