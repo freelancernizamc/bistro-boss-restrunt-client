@@ -27,7 +27,7 @@ const SignUp = () => {
                     .then(() => {
                         // console.log('User profile info updated')
                         const saveUser = { name: data.name, email: data.email, photoURL: data.photoURL }
-                        fetch('https://bistro-boss-server-azure.vercel.app/users', {
+                        fetch('http://localhost:5000/users', {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json'
@@ -60,7 +60,7 @@ const SignUp = () => {
     const handleGoogleSignIn = () => {
         signInWithGoogle().then(result => {
             const saveUser = { name: result.user.displayName, email: result.user.email, photoURL: result.user.photoURL }
-            fetch('https://bistro-boss-server-azure.vercel.app/users', {
+            fetch('http://localhost:5000/users', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'

@@ -5,16 +5,21 @@ import avatarImg from '../../../assets/icon/avatar.jpg';
 import { useContext } from 'react';
 import { AuthContext } from '../../../providers/AuthProviders';
 import useCart from '../../../hooks/useCart';
+import useAdmin from '../../../hooks/useAdmin';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
+    const [isAdmin] = useAdmin();
     const [cart] = useCart();
     const navOptions = <>
         <li><Link to="/">HOME</Link></li>
         <li><a>CONTACT US</a></li>
 
+        {
+            isAdmin ? <li><Link to="/dashboard/adminhome">Dashboard</Link></li> :
 
-        <li><Link to='/dashboard'>DASHBOARD</Link></li>
+                <li><Link to="/dashboard/userhome">Dashboard</Link></li>
+        }
         <li><Link to="/menu">OUR MENU</Link></li>
         <li><Link to='/order/salad'>ORDER FOOD</Link></li>
         <li><Link to='/dashboard/mycart'><div className=" gap-2 flex">
