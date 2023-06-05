@@ -78,7 +78,7 @@ const Dashboard = () => {
                             <li><NavLink to="/dashboard/adminhome"><FaHome /> Admin Home</NavLink></li>
                             <li><NavLink to="/dashboard/additem"><FaUtensils /> Add An Item</NavLink></li>
                             <li><NavLink to="/dashboard/manageitems"><FaWallet /> Manage Items</NavLink></li>
-                            <li><NavLink to="/history"><FaBook /> Manage Bookings</NavLink></li>
+                            <li><NavLink to="/dashboard/manageorders"><FaBook /> Manage Orders</NavLink></li>
                             <li><NavLink to="/dashboard/allusers"><FaUsers /> All Users</NavLink></li>
 
                             <div className="divider"></div>

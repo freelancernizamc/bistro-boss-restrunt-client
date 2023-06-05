@@ -90,9 +90,9 @@ const AddItem = () => {
                     <label className="label">
                         <span className="label-text">Item Image*</span>
                     </label>
-                    <input type="file" {...register("image", { required: true })} className="file-input file-input-bordered w-full " />
+                    <input type="file" {...register("image", { required: true })} className="file-input file-input-bordered w-full" />
                 </div>
-                <input className="btn btn-sm mt-4" type="submit" value="Add Item" />
+                <input className="btn btn-sm mt-4 bg-[#880304]" type="submit" value="Add Item" />
             </form>
         </div>
     );
