@@ -1,30 +1,41 @@
-import { useState, useEffect } from "react";
-import useAxiosSecure from "./useAxiosSecure";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const usePayment = () => {
+const usePayment = (currentUserEmail) => {
     const [payments, setPayments] = useState([]);
-    const axiosSecure = useAxiosSecure();
-
+    const [totalOrders, setTotalOrders] = useState(0);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    console.log(payments);
     useEffect(() => {
-        const fetchPayments = async () => {
-            try {
-                const response = await axiosSecure.post("/payments", { data: payments });
+        // Fetch user's payments
+        axios.get(`https://bistro-boss-server-azure.vercel.app/payments?email=${currentUserEmail}`)
+            .then(response => {
+                setPayments(response.data);
+                setLoading(false);
+            })
+            .catch(error => {
+                setError(error);
+                setLoading(false);
+            });
 
+        // Fetch total order count for the user
+        axios.get(`https://bistro-boss-server-azure.vercel.app/totalOrders?email=${currentUserEmail}`)
+            .then(response => {
+                console.log(response.data)
+                setTotalOrders(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching total order count:', error);
+            });
+    }, [currentUserEmail]);
 
-                const paymentData = response.data;
-                console.log("Payment Data:", paymentData);
-                console.log("Paid Payments:", paidPayments);
-                const paidPayments = paymentData.filter((payment) => payment.paid);
-                setPayments(paidPayments);
-            } catch (error) {
-                console.error("Error fetching payment data:", error);
-            }
-        };
-
-        fetchPayments();
-    }, [axiosSecure]);
-
-    return [payments];
+    return {
+        payments,
+        totalOrders,
+        loading,
+        error
+    };
 };
 
 export default usePayment;
